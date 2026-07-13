@@ -18,14 +18,33 @@ Retrieves genes associated with GO biological process terms and assigns gene set
 
 ### 2. Liver AOP Network Construction
 
-**Scripts**
+### `AOP_selection.R`
+Retrieves liver-associated Adverse Outcome Pathways (AOPs) from the AOP-Wiki SPARQL endpoint using predefined liver-related keywords. Following manual curation of the retrieved AOPs, the script extracts the corresponding Key Events (KEs) and Key Event Relationships (KERs) required for network construction.
 
-- `AOP_selection.R`
-- `AOP_network_generation.R`
+**Outputs**
+- `selected_liver_aops.tsv`
+- `kes.tsv`
+- `ker.tsv`
 
-**Description**
+---
 
-Retrieves liver-associated AOPs from AOP-Wiki using SPARQL queries, performs manual curation of AOPs, constructs the liver AOP network, and visualizes the resulting network in Cytoscape.
+### `AOP_network_preparation.R`
+Prepares the liver AOP network by generating node and edge tables and integrating GO-based KE gene sets. The script produces network files for both **State I** (pre-annotated KEs) and **State III** (improved pre-annotated + newly annotated KEs), including annotation status and KE gene set information.
+
+**Outputs**
+- `nodes.tsv`
+- `edges.tsv`
+- `state_I_nodes.tsv`
+- `state_III_nodes.tsv`
+
+---
+
+### `AOP_network_visualization.R`
+Generates and visualizes the liver AOP network in Cytoscape using the prepared node and edge tables. Nodes are styled according to annotation status, node size is scaled by KE gene set size, and network statistics are calculated to identify highly connected (hub) KEs.
+
+**Outputs**
+- Cytoscape session (`.cys`)
+- `top_10_hub_nodes.tsv`
 
 ---
 
